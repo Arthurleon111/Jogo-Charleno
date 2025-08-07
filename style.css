@@ -1,58 +1,109 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #1a1a2e;
+  font-family: sans-serif;
+  color: white;
+  overflow: hidden;
+  position: relative; 
 }
 
-.game-board{
-    border: 1px solid black;
-    width: 80%;
-    height: 500px;
-    position: relative;
-    margin: 0 auto;
+  .info {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .level {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .health {
+    display: flex;
+    gap: 40px;
+    margin-top: 10px;
+  }
+
+  .bar {
+    width: 150px;
+    height: 20px;
+    border: 2px solid white;
+    border-radius: 10px;
     overflow: hidden;
-}
+  }
 
-.pipe{
-    position: absolute;
-    bottom: 0;
-    height: 80px;
+  .bar-fill {
+    height: 100%;
+    transition: width 0.3s;
+  }
+
+  .hero .bar-fill { background: #4CAF50; }
+  .villain .bar-fill { background: #F44336; }
+
+  .battlefield {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .character {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+  }
+
+  .name {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .rect {
     width: 80px;
-    animation: animacao-pipe 3s linear infinite;
-}
+    height: 200px;
+    border-radius: 10px;
+    border: 3px solid white;
+    position: relative;
+    overflow: hidden;
+  }
 
-.mario{
+  .hero-rect { background: #2196F3; }
+  .villain-rect { background: #9C27B0; }
+
+  .game-controls {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #FFC107;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .sequence-display {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #FFEB3B;
+  }
+
+  .projectile {
     position: absolute;
-    bottom: 0;
-    left: 50px;
-    width: 100px;
-    height: 100px;
-    animation: mario-jump 1s ease-in-out  alternate;*/    
-}
+    width: 18px;
+    height: 18px;
+    background: #FFEB3B;
+    border-radius: 50%;
+    box-shadow: 0 0 8px white;
+    pointer-events: none;
+    
+  }
 
-@keyframes animacao-pipe{
-    from{
-        right: -100px;
-    }
-    to{
-        right: 100%;
-    }
-}
-
-@keyframes mario-jump{
-    0%{
-        bottom: 0px;
-    }
-    40%{
-        bottom: 80px;
-    }
-    50%{
-        bottom: 90px;
-    }
-    60%{
-        bottom: 100px;
-    }
-    100%{
-        bottom: 0px;
-    }
-}
+ 
