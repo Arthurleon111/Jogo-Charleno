@@ -1,16 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Jogo Teste</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css">
+  <title>Batalha de Magos</title>
+  
 </head>
 <body>
-    <div class="game-board">
-        <img src="mario-jump-images/mario.gif" class="mario">
-        <img src="mario-jump-images/pipe.png" class="pipe">
+
+  <div class="info">
+    <div class="level">Nível: <span id="level">1</span></div>
+    <div class="health">
+      <div class="hero">
+        <div class="name">Herói</div>
+        <div class="bar"><div class="bar-fill" id="heroHealth" style="width: 100%"></div></div>
+      </div>
+      <div class="villain">
+        <div class="name">Vilão</div>
+        <div class="bar"><div class="bar-fill" id="villainHealth" style="width: 100%"></div></div>
+      </div>
     </div>
-</body>
+  </div>
+
+  <div class="battlefield">
+    <!-- Herói -->
+    <div class="character">
+      <div class="name">Heroi</div>
+      <div class="rect hero-rect" id="hero"></div>
+    </div>
+
+    <!-- Vilão -->
+    <div class="character">
+      <div class="name" id="villainName">Vilão Nível 1</div>
+      <div class="rect villain-rect" id="villain"></div>
+    </div>
+  </div>
+
+  <div class="game-controls">
+    <button id="startBtn">Iniciar Batalha</button>
+  </div>
+
+  <div class="sequence-display">
+    Memorize a sequência...
+  </div>
+
+  <!-- Botões de cores -->
+  <div id="colorButtons" style="margin-top: 30px; display: flex; gap: 10px;">
+    <div class="color-btn" data-id="0" style="background:red; width:60px; height:60px; border-radius:50%; cursor:pointer;"></div>
+    <div class="color-btn" data-id="1" style="background:blue; width:60px; height:60px; border-radius:50%; cursor:pointer;"></div>
+    <div class="color-btn" data-id="2" style="background:yellow; width:60px; height:60px; border-radius:50%; cursor:pointer;"></div>
+    <div class="color-btn" data-id="3" style="background:green; width:60px; height:60px; border-radius:50%; cursor:pointer;"></div>
+  </div>
+
 <script src="script.js"></script>
+</body>
 </html>
