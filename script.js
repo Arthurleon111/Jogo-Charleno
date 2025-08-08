@@ -143,6 +143,8 @@
         updateHealth();
         if (heroLives <= 0) {
           endGame(false);
+        }else{
+            setTimeout(startNextSequence, 800)
         }
       }
     }, 30);
@@ -165,6 +167,7 @@
   function nextLevel() {
     setTimeout(() => {
       level++;
+      levelDisplay.textContent = level;
       hitsThisLevel = 0;
       sequence = [];
       playerIndex = 0;
@@ -209,7 +212,7 @@
   function playerWrong() {
     canClick = false;
     sequenceDisplay.textContent = "Erro! O vilão contra-ataca!";
-    hitsThisLevel = 0; // Reseta progresso do nível
+    hitsThisLevel = 0; // Reseta progresso do nível==
     shootVillainProjectile();
   }
 
@@ -270,4 +273,3 @@
 
   // Botão de início
   startBtn.addEventListener('click', startBattle);
-
