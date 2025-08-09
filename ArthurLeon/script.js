@@ -108,47 +108,68 @@
 
   // Vilão atira no herói
   function shootVillainProjectile() {
-    const projectile = document.createElement('div');
-    projectile.classList.add('projectile');
-    projectile.style.backgroundColor = 'purple';
+  // Criar projétil
+  const projectile = document.createElement('div');
+  projectile.classList.add('projectile');
+  projectile.style.backgroundColor = 'purple';
+  projectile.style.position = 'absolute';
+  projectile.style.width = '18px';
+  projectile.style.height = '18px';
+  projectile.style.borderRadius = '50%';
+  projectile.style.boxShadow = '0 0 8px white';
+  projectile.style.zIndex = '1000';
+  projectile.style.pointerEvents = 'none';
 
-    const heroRect = hero.getBoundingClientRect();
-    const villainRect = villain.getBoundingClientRect();
+  // Obter posições
+  const villainRect = villain.getBoundingClientRect();
+  const heroRect = hero.getBoundingClientRect();
 
-    const top = villainRect.top + window.scrollY + villainRect.height / 2 - 9;
-    const left = villainRect.left + window.scrollX + villainRect.width / 2 - 9;
+  // Posição inicial: centro do vilão
+  const startX = villainRect.left + villainRect.width / 2 - 9;
+  const startY = villainRect.top + villainRect.height / 2 - 9;
 
-    projectile.style.position = 'absolute';
-    projectile.style.left = left + 'px';
-    projectile.style.top = top + 'px';
-    document.body.appendChild(projectile);
+  // Aplicar posição absoluta com scroll
+  projectile.style.left = (startX + window.scrollX) + 'px';
+  projectile.style.top = (startY + window.scrollY) + 'px';
 
-    let x = 0;
-    const targetDistance = -(heroRect.left - villainRect.left - 100);
+  // Adicionar ao DOM
+  document.body.appendChild(projectile);
 
-    const move = setInterval(() => {
-      x -= 5;
-      projectile.style.transform = `translateX(${x}px)`;
+  // Calcular distância total em X (da direita para a esquerda)
+  const totalDistance = heroRect.left - (villainRect.left + villainRect.width) + 100;
 
-      if (x <= targetDistance) {
-        clearInterval(move);
-        projectile.remove();
+  // Animação com transform: translateX
+  let moved = 0;
+  const step = 5; // px por frame
+  const interval = setInterval(() => {
+    moved += step;
+    projectile.style.transform = `translateX(-${moved}px)`; // movimento para a esquerda
 
-        hero.style.opacity = 0.6;
-        setTimeout(() => {
-          hero.style.opacity = 1;
-        }, 150);
+    // Quando chegar perto do herói
+    if (moved >= Math.abs(totalDistance)) {
+      clearInterval(interval);
 
-        heroLives--;
-        updateHealth();
-        if (heroLives <= 0) {
-          endGame(false);
-        }else{
-            setTimeout(startNextSequence, 800)
-        }
+      // Efeito no herói
+      hero.style.opacity = 0.6;
+      setTimeout(() => {
+        hero.style.opacity = 1;
+      }, 150);
+
+      // Remover projétil
+      projectile.remove();
+
+      // Aplicar dano
+      heroLives--;
+      updateHealth();
+
+      if (heroLives <= 0) {
+        endGame(false);
+      } else {
+        setTimeout(startNextSequence, 800);
       }
-    }, 30);
-  }
+    }
+  }, 30);
+}
 
   // Inicia nova sequência no mesmo nível
   function startNextSequence() {
